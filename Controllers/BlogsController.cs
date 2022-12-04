@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Blog_MVC.Data;
+using Blog_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Blog_MVC.Data;
-using Blog_MVC.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog_MVC.Controllers
 {
@@ -48,7 +46,6 @@ namespace Blog_MVC.Controllers
         // GET: Blogs/Create
         public IActionResult Create()
         {
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogUserId,Name,Description,Created,Updated,ImageData,ContentType")] Blog blog)
+        public async Task<IActionResult> Create([Bind("Name,Description,Image")] Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +79,7 @@ namespace Blog_MVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", blog.BlogUserId);
+
             return View(blog);
         }
 
@@ -91,7 +88,7 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogUserId,Name,Description,Created,Updated,ImageData,ContentType")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image")] Blog blog)
         {
             if (id != blog.Id)
             {

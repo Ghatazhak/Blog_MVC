@@ -22,6 +22,8 @@ namespace Blog_MVC.Models
         [DataType(DataType.Date)]
         [Display(Name = "Created Date")]
         public DateTime Created { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Updated Date")]
         public DateTime? Updated { get; set; }
 
         [Display(Name = "Blog Image")]

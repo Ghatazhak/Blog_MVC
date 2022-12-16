@@ -50,7 +50,11 @@ namespace Blog_MVC
 
             // Register my instance of mail settings
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            // Register Email Service
             services.AddScoped<IBlogEmailSender, EmailService>();
+
+            // Register Image Service
+            services.AddScoped<IImageService, BasicImageService>();
 
         }
 

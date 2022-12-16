@@ -73,7 +73,7 @@ namespace Blog_MVC.Services
 
 
             // Step 2:  use the user manager to create a new user that is defined by adminUser
-            await _userManager.CreateAsync(adminUser, "boom");
+            await _userManager.CreateAsync(adminUser, "Abc&123!");
 
 
             // Step 3: add this new user to the admin role.
@@ -94,7 +94,7 @@ namespace Blog_MVC.Services
             };
 
             // Step 2:  use the user manager to create a new user that is defined by modUser
-            await _userManager.CreateAsync(modUser, "boom");
+            await _userManager.CreateAsync(modUser, "Abc&123!");
 
 
             // Step 3: add this new user to the mod role.

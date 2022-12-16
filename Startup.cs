@@ -32,11 +32,6 @@ namespace Blog_MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
 
-
-
-
-
-
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)

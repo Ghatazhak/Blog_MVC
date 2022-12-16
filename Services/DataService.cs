@@ -2,6 +2,7 @@
 using Blog_MVC.Enums;
 using Blog_MVC.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,11 +24,18 @@ namespace Blog_MVC.Services
 
         public async Task ManageDataAsync()
         {
+            // Task: Create the DB from the Migrations
+            await _dbContext.Database.MigrateAsync();
+
+
             // Task 1: Seed a few roles into the system
             await SeedRolesAsync();
 
             // Task 2: Seed a few user in to the system
             await SeedUsersAsync();
+
+
+
 
         }
 

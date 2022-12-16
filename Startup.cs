@@ -1,6 +1,7 @@
 using Blog_MVC.Data;
 using Blog_MVC.Models;
 using Blog_MVC.Services;
+using Blog_MVC.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +47,10 @@ namespace Blog_MVC
 
             // Register my custom DataService class
             services.AddScoped<DataService>();
+
+            // Register my instance of mail settings
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddScoped<IBlogEmailSender, EmailService>();
 
         }
 

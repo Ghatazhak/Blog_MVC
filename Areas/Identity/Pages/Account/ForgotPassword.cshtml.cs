@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog_MVC.Models;
+using Blog_MVC.Services;
 using Microsoft.AspNetCore.Authorization;
-using Blog_MVC.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace Blog_MVC.Areas.Identity.Pages.Account
 {
@@ -18,9 +16,9 @@ namespace Blog_MVC.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<BlogUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IBlogEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<BlogUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<BlogUser> userManager, IBlogEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

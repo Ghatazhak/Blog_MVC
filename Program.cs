@@ -14,7 +14,7 @@ namespace Blog_MVC
 
             var host = CreateHostBuilder(args).Build();
 
-            // Pull out my registered service
+            // Pull out my registered service using not constructor injection
             var dataService = host.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
 
             await dataService.ManageDataAsync();

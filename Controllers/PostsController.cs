@@ -124,12 +124,14 @@ namespace Blog_MVC.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _context.Posts.Include(p => p.Tags).FirstOrDefaultAsync(p => p.Id == id);
+
             if (post == null)
             {
                 return NotFound();
             }
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name", post.BlogId);
+            ViewData["TagValues"] = string.Join(",", post.Tags.Select(t => t.Text));
 
             return View(post);
         }

@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <select style="width: 100%" name="TagValues" id="TagList" multiple></select>
+                        <select style="width: 100%" name="tagValues" id="TagList" multiple></select>
                     </div>
                 </div>
             </div>
@@ -87,10 +87,12 @@
 @section Scripts{
 
     <script>
+        let tagValues = '@ViewData["TagValues"]';
         //Default font size but not for placeholder...
         $('#Content').summernote({
             placeholder: "Content"
         });
+    
     </script>
     <script src="/js/Custom.js"></script>
 }

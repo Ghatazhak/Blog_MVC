@@ -33,7 +33,8 @@ function DeleteTag() {
         index--;
     }
 
-
-
-    var selectedTag = document.getElementById("Taglist").value.options;
 }
+
+$("form").on("submit", function () {
+    $("#TagList option").prop("selected", "selected");
+})

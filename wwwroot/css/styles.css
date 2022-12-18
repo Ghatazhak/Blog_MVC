@@ -11238,6 +11238,14 @@ header.masthead .site-heading .h1 {
   margin-top: 0;
   color: #6c757d;
 }
+
+.btn-block {
+    width: 100%;
+}
+
+
+
+
 .post-preview > .post-meta > a {
   text-decoration: none;
 }

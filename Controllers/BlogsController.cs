@@ -54,7 +54,7 @@ namespace Blog_MVC.Controllers
         }
 
         // GET: Blogs/Create
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -83,6 +83,7 @@ namespace Blog_MVC.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -104,6 +105,7 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Blog blog, IFormFile newImage)
         {
             if (id != blog.Id)
@@ -154,6 +156,7 @@ namespace Blog_MVC.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -173,6 +176,7 @@ namespace Blog_MVC.Controllers
         }
 
         // POST: Blogs/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

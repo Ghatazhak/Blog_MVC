@@ -21,7 +21,7 @@
     <thead>
     <tr>
         <th>
-           Image
+            Image
         </th>
         <th>
             Title
@@ -52,4 +52,24 @@
     }
     </tbody>
 </table>
+
+<hr/>
+
+<!--Add paging controls here-->
+<div class="row">
+    <div class="col h3">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        @Html.PagedListPager(Model, page => Url.Action("BlogPostIndex", new {id = Model.FirstOrDefault().BlogId, page = page}),
+        new PagedListRenderOptions
+        {
+        LiElementClasses = new string[] {"page-item"},
+        PageClasses = new string[]{"page-link"}
+        })
+    </div>
+</div>
 

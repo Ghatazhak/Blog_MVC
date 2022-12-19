@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Blog_MVC.Controllers
 {
@@ -36,16 +37,22 @@ namespace Blog_MVC.Controllers
         }
 
 
-        public async Task<IActionResult> BlogPostIndex(int? id)
+        public async Task<IActionResult> BlogPostIndex(int? id, int? page)
         {
             if (id is null)
             {
                 return NotFound();
             }
 
-            var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
 
-            return View("Index", posts);
+            var posts = await _context.Posts
+                .Where(p => p.BlogId == id && p.ReadyStatus == Enums.ReadyStatus.ProductionReady)
+                .OrderByDescending(p => p.Created)
+                .ToPagedListAsync(pageNumber, pageSize);
+
+            return View(posts);
         }
 
         //// GET: Posts/Details/5

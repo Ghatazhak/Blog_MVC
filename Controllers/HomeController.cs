@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Blog_MVC.Controllers
 {
@@ -24,17 +26,21 @@ namespace Blog_MVC.Controllers
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            var blogs = await _dbContext.Blogs
-                .Include(b => b.BlogUser)
-                .ToListAsync();
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
 
+            //var blogs = _dbContext.Blogs.Where(
+            //        b => b.Posts.Any(p => p.ReadyStatus == ReadyStatus.ProductionReady))
+            //    .OrderByDescending(b => b.Created)
+            //    .ToPagedListAsync(pageNumber, pageSize);
 
+            var blogs = _dbContext.Blogs.Include(b => b.BlogUser)
+                .OrderByDescending(b => b.Created)
+                .ToPagedListAsync(pageNumber, pageSize);
 
-
-
-            return View(blogs);
+            return View(await blogs);
         }
 
         public IActionResult About()

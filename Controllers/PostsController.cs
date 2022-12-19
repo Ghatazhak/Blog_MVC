@@ -46,9 +46,6 @@ namespace Blog_MVC.Controllers
             var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
 
             return View("Index", posts);
-
-
-
         }
 
         //// GET: Posts/Details/5

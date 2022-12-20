@@ -48,9 +48,6 @@ namespace Blog_MVC.Controllers
         }
 
 
-
-
-
         // GET: Posts
         public async Task<IActionResult> Index()
         {
@@ -77,26 +74,6 @@ namespace Blog_MVC.Controllers
             return View(posts);
         }
 
-        //// GET: Posts/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var post = await _context.Posts
-        //        .Include(p => p.Blog)
-        //        .Include(p => p.BlogUser)
-        //        .Include(p => p.Tags)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(post);
-        //}
 
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(string slug)

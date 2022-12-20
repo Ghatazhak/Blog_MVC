@@ -40,6 +40,51 @@ namespace Blog_MVC.Controllers
             return View("Edit", deletedComments);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Moderate(int id,
+            [Bind("Id,Body,ModeratedBody,ModerationType")] Comment comment)
+        {
+            if (id != comment.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var originalComment = await _context.Comments.Include(c => c.Post)
+                    .FirstOrDefaultAsync(c => c.Id == comment.Id);
+                try
+                {
+                    originalComment.ModeratedBody = comment.ModeratedBody;
+                    originalComment.ModerationType = comment.ModerationType;
+
+                    originalComment.Moderated = DateTime.Now;
+                    originalComment.ModeratorId = userManager.GetUserId(User);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CommentExists(comment.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction("Details", "Posts", new { slug = originalComment.Post.Slug }, "commentSection");
+            }
+
+            return View(comment);
+        }
+
+
+
+
         // GET: Comments
         public async Task<IActionResult> Index()
         {

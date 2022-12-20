@@ -24,20 +24,20 @@ namespace Blog_MVC.Controllers
         public async Task<IActionResult> OriginalIndex()
         {
             var originalComment = await _context.Comments.ToListAsync();
-            return View("Index", originalComment);
+            return View("Edit", originalComment);
         }
 
 
         public async Task<IActionResult> ModeratedIndex()
         {
             var moderatedComments = await _context.Comments.Where(c => c.Moderated != null).ToListAsync();
-            return View("Index", moderatedComments);
+            return View("Edit", moderatedComments);
         }
 
         public async Task<IActionResult> DeletedComments()
         {
             var deletedComments = await _context.Comments.Where(c => c.Deleted != null).ToListAsync();
-            return View("Index", deletedComments);
+            return View("Edit", deletedComments);
         }
 
         // GET: Comments
@@ -68,7 +68,6 @@ namespace Blog_MVC.Controllers
             {
                 comment.BlogUserId = userManager.GetUserId(User);
                 comment.Created = DateTime.Now;
-
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

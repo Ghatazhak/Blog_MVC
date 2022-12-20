@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Blog_MVC.Data.Migrations
+namespace Blog_MVC.data.migrations
 {
     public partial class _001 : Migration
     {
@@ -232,8 +232,8 @@ namespace Blog_MVC.Data.Migrations
                     BlogUserId = table.Column<string>(type: "text", nullable: true),
                     ModeratorId = table.Column<string>(type: "text", nullable: true),
                     Body = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    Created = table.Column<int>(type: "integer", nullable: false),
-                    Updated = table.Column<int>(type: "integer", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Updated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Moderated = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Deleted = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     ModeratedBody = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),

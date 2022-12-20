@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Blog_MVC.Data.Migrations
+namespace Blog_MVC.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -173,8 +173,8 @@ namespace Blog_MVC.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.Property<int>("Created")
-                        .HasColumnType("integer");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("Deleted")
                         .HasColumnType("timestamp without time zone");
@@ -195,8 +195,8 @@ namespace Blog_MVC.Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Updated")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 

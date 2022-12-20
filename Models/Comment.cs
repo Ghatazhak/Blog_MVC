@@ -18,9 +18,9 @@ namespace Blog_MVC.Models
 
 
         [Required]
-        public DataType Created { get; set; }
+        public DateTime Created { get; set; }
 
-        public DataType? Updated { get; set; }
+        public DateTime? Updated { get; set; }
 
         public DateTime? Moderated { get; set; }
         public DateTime? Deleted { get; set; }

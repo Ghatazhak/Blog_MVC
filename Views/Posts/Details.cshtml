@@ -99,14 +99,14 @@
                             @if (comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == UserManager.GetUserId(User))
                             {
                                 <hr/>
-                <button data-bs-toggle="modal" data-bs-target="@($"#editModal{counter}")" class="btn-sm btn-dark float-end fw-bold">EDIT</button>
+                <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn-sm btn-dark float-end fw-bold">EDIT</button>
                             }
                             @if (User.IsInRole(BlogRole.Moderator.ToString()) && comment.Deleted is null)
                             {
                                 <hr/>
                                 <div class="row">
                                     <div class="col-2">
-                                        <button class="btn-sm btn-dark fw-bold btn-block" data-bs-toggle="modal" data-bs-target="@($"#moderateModal{counter}")">MODERATE</button>
+                                        <button class="btn-sm btn-dark fw-bold btn-block" data-bs-toggle="modal" data-bs-target="#moderateModal">MODERATE</button>
                                     </div>
                                     <div class="col-2">
                                         <form asp-action="Delete" asp-controller="Comments">
@@ -122,7 +122,7 @@
 
 
                     @*Modals*@
-    <div class="modal" id="@($"#editModal{counter}")">
+    <div class="modal" id="editModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -150,7 +150,7 @@
 
      
 
-    <div class="modal" id="@($"#moderateModal{counter}")">
+    <div class="modal" id="moderateModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!--Modal Header-->

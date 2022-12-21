@@ -13,12 +13,12 @@ namespace Blog_MVC.Controllers
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<BlogUser> userManager;
+        private readonly UserManager<BlogUser> _userManager;
 
         public CommentsController(ApplicationDbContext context, UserManager<BlogUser> userManager)
         {
             _context = context;
-            this.userManager = userManager;
+            this._userManager = userManager;
         }
 
         public async Task<IActionResult> OriginalIndex()
@@ -61,7 +61,7 @@ namespace Blog_MVC.Controllers
                     originalComment.ModerationType = comment.ModerationType;
 
                     originalComment.Moderated = DateTime.Now;
-                    originalComment.ModeratorId = userManager.GetUserId(User);
+                    originalComment.ModeratorId = _userManager.GetUserId(User);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -107,17 +107,19 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Body")] Comment comment)
+        public async Task<IActionResult> Create([Bind("PostId,Body,Slug")] Comment comment, string slug)
         {
             if (ModelState.IsValid)
             {
-                comment.BlogUserId = userManager.GetUserId(User);
+                comment.BlogUserId = _userManager.GetUserId(User);
                 comment.Created = DateTime.Now;
+
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
 
+            }
 
             return View(comment);
         }

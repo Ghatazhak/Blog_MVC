@@ -27,7 +27,7 @@
 <hr />
 <article>
     <div class="row">
-        <div class="col text-center font-weight-bold">
+        <div class="col text-center fw-bold">
             <h3>Custom Post Tags</h3>
         </div>
     </div>
@@ -48,6 +48,8 @@
     {
         <form asp-action="Create" asp-controller="Comments" method="post">
             @Html.Hidden("PostId", Model.Id)
+            @Html.Hidden("Slug", Model.Slug)
+            
 
             <div class="form-group">
                 <label class="form-label h2 fw-bold">Add Comment</label>

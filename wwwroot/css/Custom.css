@@ -1,5 +1,4 @@
-﻿
-.nav {
+﻿.nav {
     display: inline-block;
 }
 
@@ -32,16 +31,19 @@
     background: rgba(255, 153, 59,.35);
 }
 
-header.masthead .page-heading .subheading, header.masthead .site-heading .subheading, select, input, textarea, option, lable, .tooltip-inner {
+header.masthead .page-heading .subheading,
+header.masthead .site-heading .subheading,
+select, input, textarea, option, table, .tooltip-inner {
     font-weight: 600;
 }
 
-header.masthead .page-heading, header.masthead .post-heading,
+header.masthead .page-heading,
+header.masthead .post-heading,
 header.masthead .site-heading {
     padding: 100px 0 100px 0;
 }
 
-/*Goolge maps*/
+/*Google maps*/
 
 #map {
     height: 400px;
@@ -55,7 +57,7 @@ header.masthead .site-heading {
     font-size: 22px;
 }
 
-btn-tag {
+.btn-tag {
     margin-top: 10px
 }
 
@@ -78,11 +80,16 @@ button.btn-sm, a.btn-sm {
     border-color: #ff993b;
 }
 
+.btn-warning:hover {
+    color: #212121;
+    background-color: #ff993b;
+    border-color: #ff993b;
+}
 
 .btn-warning:hover {
-    color: white;
-    background-color: #212121;
-    outline: 4px solid #ff993b;
+    color: #212121;
+    background-color: #ff993b;
+    border-color: #ff993b;
 }
 
 .card-hr {
@@ -105,7 +112,7 @@ button.btn-sm, a.btn-sm {
     overflow: hidden;
 }
 
-.card-img, .card-img-top, .card-im-bottom {
+.card-img, .card-img-top, .card-img-bottom {
     height: 150px;
 }
 
@@ -118,13 +125,13 @@ button.btn-sm, a.btn-sm {
     color: #212121;
 }
 
-.div.swal2-container.swal2-center.swal2-backdrop-show > div {
+div.swal2-container.swal2-center.swal2-backdrop-show > div {
     outline: 4px solid black;
     border: 2px solid #ff993b;
 }
 
 
-cftooltip * {
+.cftooltip * {
     opacity: 1.0 !important;
 }
 
@@ -142,6 +149,7 @@ cftooltip * {
 .tooltip.show {
     opacity: 1;
 }
+
 
 #TagList {
     width: 100%;

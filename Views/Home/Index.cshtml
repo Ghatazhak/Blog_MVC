@@ -1,15 +1,16 @@
-﻿@using Blog_MVC.Models;
-@using Blog_MVC.Services;
-@using Blog_MVC.Enums;
-@using Microsoft.AspNetCore.Identity;
-@using X.PagedList;
-@using X.PagedList.Mvc.Core;
-@using X.PagedList.Web.Common;
+﻿@using Blog_MVC.Models
+@using Blog_MVC.Services
+@using Blog_MVC.Enums
+@using Microsoft.AspNetCore.Identity
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
 
 @inject IImageService _imageService;
 @inject UserManager<BlogUser> _userManager;
 
 @model IPagedList<Blog>
+
 
 
 <div class="row">
@@ -25,7 +26,7 @@
                         <hr class="card-hr"/>
                     </div>
                     <div>
-                        <p class="card-text cftooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="@blog.Description">@blog.Description</p>
+                        <p class="card-text cftooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="@blog.Description">@blog.Description</p>
                     </div>
                 
                     <br />
@@ -82,18 +83,19 @@
 
 @section Scripts {
     <script>
-     var swalMsg = '@TempData["SweetAlert"]'
-    if(swalMsg != ""){
-        Swal.fire({
-            icon: 'success',
-            title: swalMsg,
-            timer: 2500
-        })
-    }
+        let swalMsg = '@TempData["SweetAlert"]'
+        if(swalMsg != ""){
+            Swal.fire({
+                icon: 'success',
+                title: swalMsg,
+                timer: 2500
+            })
+        }
 
-    $(document).ready(function () {
-        $("p").tooltip();
-    });
+        $(document).ready(function () {
+            $("p").tooltip();
+        });
               
     </script>
+    
 }

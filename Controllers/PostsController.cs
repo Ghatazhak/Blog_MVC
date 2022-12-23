@@ -1,6 +1,7 @@
 ﻿using Blog_MVC.Data;
 using Blog_MVC.Models;
 using Blog_MVC.Services;
+using Blog_MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -76,29 +77,50 @@ namespace Blog_MVC.Controllers
 
 
         // GET: Posts/Details/5
+        //public async Task<IActionResult> Details(string slug)
+        //{
+        //    if (string.IsNullOrEmpty(slug))
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var post = await _context.Posts
+        //        .Include(p => p.Blog)
+        //        .Include(p => p.BlogUser)
+        //        .Include(p => p.Tags)
+        //        .Include(p => p.Comments)
+        //        .ThenInclude(c => c.BlogUser)
+        //        .FirstOrDefaultAsync(m => m.Slug == slug);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(post);
+        //}
+
         public async Task<IActionResult> Details(string slug)
         {
-            if (string.IsNullOrEmpty(slug))
-            {
-                return NotFound();
-            }
-
             var post = await _context.Posts
-                .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.BlogUser)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.Moderator)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
-            if (post == null)
+
+            if (post == null) return NotFound();
+
+            var dataVm = new PostDetailViewModel()
             {
-                return NotFound();
-            }
-
-            return View(post);
+                Post = post,
+                Tags = _context.Tags
+                    .Select(t => t.Text.ToLower())
+                    .Distinct().ToList()
+            };
+            return View(dataVm);
         }
-
-
 
 
 

@@ -107,7 +107,7 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostId,Body,Slug")] Comment comment, string slug)
+        public async Task<IActionResult> Create([Bind("PostId,Body")] Comment comment, string slug)
         {
             if (ModelState.IsValid)
             {

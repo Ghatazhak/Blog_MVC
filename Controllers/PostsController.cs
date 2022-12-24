@@ -75,29 +75,15 @@ namespace Blog_MVC.Controllers
             return View(posts);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> TagIndex(string tag, int? page)
+        {
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
+            var posts = await _context.Posts.Include(p => p.Tags).Where(t => t.Tags.ToString() == tag).ToPagedListAsync(pageNumber, pageSize);
 
-        // GET: Posts/Details/5
-        //public async Task<IActionResult> Details(string slug)
-        //{
-        //    if (string.IsNullOrEmpty(slug))
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var post = await _context.Posts
-        //        .Include(p => p.Blog)
-        //        .Include(p => p.BlogUser)
-        //        .Include(p => p.Tags)
-        //        .Include(p => p.Comments)
-        //        .ThenInclude(c => c.BlogUser)
-        //        .FirstOrDefaultAsync(m => m.Slug == slug);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(post);
-        //}
+            return View("BlogPostIndex", posts);
+        }
 
         public async Task<IActionResult> Details(string slug)
         {
@@ -140,8 +126,11 @@ namespace Blog_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogId,Title,Abstract,Content,ReadyStatus,Image")] Post post, List<string> tagValues)
+        public async Task<IActionResult> Create([Bind("BlogId,Title,Abstract,Content,ReadyStatus,Image")] Post post, List<string> tagValues, int? page)
         {
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
+
             if (ModelState.IsValid)
             {
                 post.Created = DateTime.Now;
@@ -157,7 +146,6 @@ namespace Blog_MVC.Controllers
 
                 //Create a variable to store whether an error has occurred
                 var validationError = false;
-
 
 
                 //Detect empty slug
@@ -176,16 +164,6 @@ namespace Blog_MVC.Controllers
 
                 }
 
-                //else if (slug.Contains("test"))
-                //{
-                //    validationError = true;
-                //    ModelState.AddModelError("", "Uh-oh are you testing again??");
-                //    ModelState.AddModelError("Title", "The title word contain the word test");
-                //}
-
-
-
-
 
                 if (validationError)
                 {
@@ -194,9 +172,6 @@ namespace Blog_MVC.Controllers
                 }
 
                 post.Slug = slug;
-
-
-
 
                 _context.Add(post);
                 await _context.SaveChangesAsync();
@@ -214,13 +189,23 @@ namespace Blog_MVC.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                var posts = await _context.Posts.ToPagedListAsync(pageNumber, pageSize);
+                return View("BlogPostIndex", posts);
             }
 
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Description", post.BlogId);
 
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Description", post.BlogId);
             return View(post);
+
         }
+
+
+
+
+
+
+
+
 
         // GET: Posts/Edit/5
         public async Task<IActionResult> Edit(int? id)

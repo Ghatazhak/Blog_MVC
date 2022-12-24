@@ -77,7 +77,7 @@
     @foreach (var comment in Model.Post.Comments)
     {
         <div class="card border-danger p-0 mb-2 bg-light">
-            <img class="card-img-top mr-3 mt-3 rounded-circle" style="width: 60px;" src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" />
+            <img class="card-img-top ms-3 mt-3 img-fluid rounded-circle" style="width: 100px;" src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" />
             <div class="card-body">
                 <h4>@comment.BlogUser.FullName</h4>
 
@@ -87,7 +87,7 @@
                         <i>
                             <span class="small">
                                 <span class="fw-bold">
-                                    Moderated <span class="text-danger font-italic">(@comment.ModerationType.ToString().ToLower())</span>
+                                    Moderated <span class="text-danger fst-italic">(@comment.ModerationType.ToString().ToLower())</span>
                                 </span>
                                 : @comment.Moderated?.ToString("MMM dd, yyyy")
                             </span>
@@ -198,10 +198,5 @@
                 </div>
             </div>
         </div>
-
     }
-    
-    
-    
-
 </div>

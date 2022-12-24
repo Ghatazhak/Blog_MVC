@@ -40,13 +40,12 @@ namespace Blog_MVC.Controllers
             return View("Edit", deletedComments);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> TagIndex()
-        //{
-        //    var tags = _context.Tags.Select(t => t.Text.ToLower())
-        //        .Distinct().ToListAsync();
-        //    return View( await tags);
-        //}
+        [HttpGet]
+        public IActionResult TagIndex()
+        {
+            var tags = _context.Tags;
+            return View(tags);
+        }
 
 
         [HttpPost]

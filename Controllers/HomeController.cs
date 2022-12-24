@@ -31,11 +31,6 @@ namespace Blog_MVC.Controllers
             var pageNumber = page ?? 1;
             var pageSize = 5;
 
-            //var blogs = _dbContext.Blogs.Where(
-            //        b => b.Posts.Any(p => p.ReadyStatus == ReadyStatus.ProductionReady))
-            //    .OrderByDescending(b => b.Created)
-            //    .ToPagedListAsync(pageNumber, pageSize);
-
             var blogs = _dbContext.Blogs.Include(b => b.BlogUser)
                 .OrderByDescending(b => b.Created)
                 .ToPagedListAsync(pageNumber, pageSize);

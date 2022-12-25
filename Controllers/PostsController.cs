@@ -80,9 +80,24 @@ namespace Blog_MVC.Controllers
         {
             var pageNumber = page ?? 1;
             var pageSize = 5;
-            var posts = await _context.Posts.Include(p => p.Tags).Where(t => t.Tags.ToString() == tag).ToPagedListAsync(pageNumber, pageSize);
 
-            return View("BlogPostIndex", posts);
+            var posts = await _context.Posts.ToListAsync();
+            var tags = await _context.Tags.ToListAsync();
+
+            List<Post> matchedPosts = new List<Post>();
+
+            foreach (var post in posts)
+            {
+                var listOfTags = post.Tags.ToListAsync();
+
+                if (listOfTags.ToString().Contains(tag))
+                {
+                    matchedPosts.Add(post);
+                }
+
+            }
+
+            return View("BlogPostIndex", await matchedPosts.ToPagedListAsync(pageNumber, pageSize));
         }
 
         public async Task<IActionResult> Details(string slug)

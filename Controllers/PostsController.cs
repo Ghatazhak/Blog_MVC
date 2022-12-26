@@ -138,8 +138,10 @@ namespace Blog_MVC.Controllers
         // GET: Posts/Create
         public IActionResult Create(int? id)
         {
+
+
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
-            ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -211,8 +213,7 @@ namespace Blog_MVC.Controllers
 
                 await _context.SaveChangesAsync();
 
-                var posts = await _context.Posts.ToPagedListAsync(pageNumber, pageSize);
-                return View("BlogPostIndex", posts);
+                return RedirectToAction("BlogPostIndex", new { id = post.BlogId });
             }
 
 
@@ -220,12 +221,6 @@ namespace Blog_MVC.Controllers
             return View(post);
 
         }
-
-
-
-
-
-
 
 
 
@@ -263,10 +258,11 @@ namespace Blog_MVC.Controllers
 
             if (ModelState.IsValid)
             {
+                var originalPost = await _context.Posts.Include(p => p.Tags).FirstOrDefaultAsync(p => p.Id == post.Id);
                 try
                 {
                     //The original Post
-                    var originalPost = await _context.Posts.Include(p => p.Tags).FirstOrDefaultAsync(p => p.Id == post.Id);
+
 
                     originalPost.Updated = DateTime.Now;
                     originalPost.Title = post.Title;
@@ -325,10 +321,15 @@ namespace Blog_MVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+
+                return RedirectToAction("BlogPostIndex", new { id = originalPost.BlogId });
             }
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Description", post.BlogId);
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", post.BlogUserId);
+
+
+
             return View(post);
         }
 

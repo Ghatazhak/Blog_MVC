@@ -26,13 +26,8 @@ namespace Blog_MVC.Controllers
             _userManager = userManager;
         }
 
-        // GET: Blogs
-        public async Task<IActionResult> Index()
-        {
 
-            var applicationDbContext = _context.Blogs.Include(b => b.BlogUser);
-            return View(await applicationDbContext.ToListAsync());
-        }
+
 
         // GET: Blogs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -77,7 +72,7 @@ namespace Blog_MVC.Controllers
 
                 _context.Add(blog);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id", blog.BlogUserId);
             return View(blog);

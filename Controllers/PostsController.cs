@@ -76,17 +76,35 @@ namespace Blog_MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TagIndex(string tag, int? page)
+        public async Task<IActionResult> TagIndex(string tagString, int? page)
         {
+            Tag tag = new Tag()
+            {
+                Text = tagString
+            };
             var pageNumber = page ?? 1;
             var pageSize = 5;
 
-            //var posts = await _context.Posts.Include(p => p.Tags.Where(t => t.Text == tag)).ToListAsync();
-            var posts = await _context.Posts.Include(p => p.Tags.Where(t => t.Text == tag)).ToPagedListAsync(pageNumber, pageSize);
 
 
+            var allPost = await _context.Posts.Include(t => t.Tags).ToListAsync();
 
-            return View("BlogPostIndex", posts);
+            List<Post> filteredPost = new List<Post>();
+
+            foreach (var post in allPost)
+            {
+                var allTagsOfPost = post.Tags.ToList();
+                foreach (var t in allTagsOfPost)
+                {
+                    if (t.Equals(tag))
+                    {
+                        filteredPost.Add(post);
+                    }
+                }
+            }
+
+
+            return View("BlogPostIndex", filteredPost.ToPagedList(pageNumber, pageSize));
         }
 
         public async Task<IActionResult> Details(string slug)

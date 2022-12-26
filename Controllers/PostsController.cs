@@ -139,8 +139,8 @@ namespace Blog_MVC.Controllers
         public IActionResult Create(int? id)
         {
 
-
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
+            ViewData["BlogId"] = id;
+            //ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
             //ViewData["BlogUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }

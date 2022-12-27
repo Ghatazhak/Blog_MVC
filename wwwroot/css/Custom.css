@@ -27,8 +27,8 @@
     border: 2px solid black;
 }
 
-.bg-cf {
-    background: rgba(255, 153, 59,.35);
+.bg-bl {
+    background: rgba(13, 110, 253, 0.8);
 }
 
 header.masthead .page-heading .subheading,
@@ -40,7 +40,7 @@ select, input, textarea, option, table, .tooltip-inner {
 header.masthead .page-heading,
 header.masthead .post-heading,
 header.masthead .site-heading {
-    padding: 100px 0 100px 0;
+    padding: 10px 0 10px 0;
 }
 
 /*Google maps*/
@@ -71,26 +71,26 @@ button.btn-sm, a.btn-sm {
 }
 
 .btn-dark:hover {
-    border: 4px solid #ff993b;
+    border: 4px solid #0d6efd;
 }
 
 .btn-warning {
     color: #212121;
-    background-color: #ff993b;
-    border-color: #ff993b;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
 }
 
-.btn-warning:hover {
-    color: #212121;
-    background-color: #ff993b;
-    border-color: #ff993b;
-}
+    .btn-warning:hover {
+        color: #212121;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
 
-.btn-warning:hover {
-    color: #212121;
-    background-color: #ff993b;
-    border-color: #ff993b;
-}
+    .btn-warning:hover {
+        color: #212121;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
 
 .card-hr {
     color: #212121;
@@ -127,7 +127,7 @@ button.btn-sm, a.btn-sm {
 
 div.swal2-container.swal2-center.swal2-backdrop-show > div {
     outline: 4px solid black;
-    border: 2px solid #ff993b;
+    border: 2px solid #0d6efd;
 }
 
 
@@ -142,7 +142,7 @@ div.swal2-container.swal2-center.swal2-backdrop-show > div {
     text-align: center;
     background-color: blanchedalmond;
     border-radius: .25rem;
-    border: 2px solid #ff993b;
+    border: 2px solid #0d6efd;
     outline: 4px solid black;
 }
 
@@ -166,7 +166,7 @@ div.swal2-container.swal2-center.swal2-backdrop-show > div {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #ff993b;
+    box-shadow: inset 0 0 5px #0d6efd;
     border-radius: 10px;
 }
 

@@ -77,7 +77,7 @@
     @foreach (var comment in Model.Post.Comments)
     {
         <div class="card border-danger p-0 mb-2 bg-light">
-            <img class="card-img-top ms-3 mt-3 img-fluid rounded-circle" style="width: 100px;" src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" />
+            <img class="card-img-top ms-3 mt-3 border border-3 border-primary" style="width: 150px;" src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" />
             <div class="card-body">
                 <h4>@comment.BlogUser.FullName</h4>
 

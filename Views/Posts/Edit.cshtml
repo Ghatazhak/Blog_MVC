@@ -88,10 +88,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts{
 
     <script>
@@ -99,7 +95,7 @@
         let tagValues = '@ViewData["TagValues"]';
         //Default font size but not for placeholder...
         $('#Content').summernote({
-            placeholder: "Content"
+            placeholder: "Enter Body Text Here!"
         });
     
     </script>

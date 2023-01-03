@@ -28,10 +28,11 @@ namespace Blog_MVC
             //    options.UseSqlServer(
             //        Configuration.GetConnectionString("DefaultConnection")));
 
+            var connectionString = Configuration.GetSection("pgSettings")["pgConnection"];
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(connectionString));
 
 
             services.AddDatabaseDeveloperPageExceptionFilter();

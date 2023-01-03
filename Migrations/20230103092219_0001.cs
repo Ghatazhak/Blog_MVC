@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Blog_MVC.data.migrations
+namespace Blog_MVC.Migrations
 {
-    public partial class _001 : Migration
+    public partial class _0001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
